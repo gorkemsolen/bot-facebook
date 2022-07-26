@@ -3,6 +3,12 @@ import hashlib
 import csv
 import time
 import os.path
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.chrome.options import Options
 
 #url, ilk ve son elementlerin div sıraları ve html elementleri
 
@@ -24,9 +30,32 @@ def function(url,divNumFirst,divNumLast,htmlNum):
 
     textUtf8=url.encode("utf-8")
     md5=hashlib.md5(textUtf8)
+    
+    #....................
+    #profile erisim icin giris yapmak gerekirse
+    
+    #chrome_options = webdriver.ChromeOptions()
+    #prefs = {"profile.default_content_setting_values.notifications" : 2}
+    #chrome_options.add_experimental_option("prefs",prefs)
 
+    #browser = webdriver.Chrome(executable_path='C:/Users/admin/Downloads/chromedriver_win32/chromedriver.exe', chrome_options=chrome_options) #asagidaki path degismeli
+    #browser.get("http://www.facebook.com")
+
+    #username = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input[name='email']")))
+    #password = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input[name='pass']")))
+
+    #username.clear()
+    #username.send_keys(username)#kullanici adi girilmeli
+
+    #password.clear()
+    #password.send_keys(password)#sifre girilmeli
+
+    #button = WebDriverWait(browser, 2).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[type='submit']"))).click()
+    #time.sleep(5)
+    #....................
+    
     #bağlantı ve ekran görüntüsü
-
+    
     browser = webdriver.Chrome(executable_path='C:/Users/admin/Downloads/chromedriver_win32/chromedriver.exe')
     browser.get(url)
     print("Baglanti kuruluyor...")
@@ -63,7 +92,6 @@ def function(url,divNumFirst,divNumLast,htmlNum):
                     path = browser.find_element("xpath",htmlNum.format(x=num))               
                     if(path.text!=""):
                         tota.append(str(path.text))
-                        print(path.text)
                 except:
                     pass    
                  
@@ -145,3 +173,13 @@ function(urls[4],divNum[8],divNum[9],htmls[4])
 function(urls[5],divNum[10],divNum[11],htmls[5])
 function(urls[6],divNum[12],divNum[13],htmls[6])
 function(urls[7],divNum[14],divNum[15],htmls[7])
+
+#verilen urllerde 2 url icin giris gerekiyor o urller, div numaraları ve html elementleri yukarıdaki o-listlere eklenebilir.
+
+#https://www.facebook.com/profile.php?id=100003563130499
+#/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div/div[4]/div[2]/div/div[2]/div[2]/div[{x}]/div/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div[1]
+#16,34
+
+#https://www.facebook.com/profile.php?id=621017590
+#/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div/div[4]/div[2]/div/div[2]/div[2]/div[{x}]/div/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div[1]
+#4,5
