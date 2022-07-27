@@ -7,7 +7,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
-from webdriver_manager.chrome import ChromeDriverManager
+#from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.options import Options
 
 #url, ilk ve son elementlerin div sıraları ve html elementleri
@@ -31,14 +31,18 @@ def function(url,divNumFirst,divNumLast,htmlNum):
     textUtf8=url.encode("utf-8")
     md5=hashlib.md5(textUtf8)
     
+    
+    chrome_options = webdriver.ChromeOptions()
+    prefs = {"profile.default_content_setting_values.notifications" : 2}
+    chrome_options.add_experimental_option("prefs",prefs)
+    
+    browser = webdriver.Chrome(executable_path='C:/Users/admin/Downloads/chromedriver_win32/chromedriver.exe', chrome_options=chrome_options) 
+    
     #....................
     #profile erisim icin giris yapmak gerekirse
     
-    #chrome_options = webdriver.ChromeOptions()
-    #prefs = {"profile.default_content_setting_values.notifications" : 2}
-    #chrome_options.add_experimental_option("prefs",prefs)
-
-    #browser = webdriver.Chrome(executable_path='C:/Users/admin/Downloads/chromedriver_win32/chromedriver.exe', chrome_options=chrome_options) #asagidaki path degismeli
+    #linux icin path : '/usr/bin/chromedriver' olarak degistirilmeli
+    
     #browser.get("http://www.facebook.com")
 
     #username = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input[name='email']")))
@@ -51,12 +55,12 @@ def function(url,divNumFirst,divNumLast,htmlNum):
     #password.send_keys(password)#sifre girilmeli
 
     #button = WebDriverWait(browser, 2).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[type='submit']"))).click()
-    #time.sleep(5)
     #....................
+    
+    time.sleep(5)
     
     #bağlantı ve ekran görüntüsü
     
-    browser = webdriver.Chrome(executable_path='C:/Users/admin/Downloads/chromedriver_win32/chromedriver.exe')
     browser.get(url)
     print("Baglanti kuruluyor...")
     time.sleep(3)
@@ -73,15 +77,15 @@ def function(url,divNumFirst,divNumLast,htmlNum):
     def scroll(browser, timeout, tota):
         scroll_pause_time = timeout
 
-        last_height = browser.execute_script("return document.body.scrollHeight")
+        last_height = browser.execute_script("return document.body.scrollHeight-750")
         
         for j in range(55):
 
-            browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+            browser.execute_script("window.scrollTo(0, document.body.scrollHeight-750);")
 
             time.sleep(scroll_pause_time)
             
-            new_height = browser.execute_script("return document.body.scrollHeight")
+            new_height = browser.execute_script("return document.body.scrollHeight-750")
             if new_height == last_height:      
                 break
 
@@ -96,6 +100,8 @@ def function(url,divNumFirst,divNumLast,htmlNum):
                     pass    
                  
     scroll(browser, 3 , total)
+    #sayfa yuklenme sorunu olursa scroll timeout degeri 10 yapilabilir
+    
     time.sleep(3)
 
     #verileri düzenleme ve ekleme
