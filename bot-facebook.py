@@ -12,8 +12,8 @@ from selenium.webdriver.chrome.options import Options
 
 #url, ilk ve son elementlerin div sıraları ve html elementleri
 
-urls=["https://www.facebook.com/Hülya-Erdem-111751313846537","https://www.facebook.com/Keles-Belediyesi-1522353218086722","https://www.facebook.com/besiktasbelediyesi","https://www.facebook.com/SultanbeyliBel","https://www.facebook.com/Arnavutkoybelediyesi","https://www.facebook.com/EsenyurtBLDYS","https://www.facebook.com/Buyukcekmecebld","https://www.facebook.com/KaracabeyBel"]
-divNum=[43,106,105,153,45,123,55,146,96,221,61,152,114,273,34,70]
+urls=["https://www.facebook.com/Hülya-Erdem-111751313846537","https://www.facebook.com/Keles-Belediyesi-1522353218086722","https://www.facebook.com/besiktasbelediyesi","https://www.facebook.com/SultanbeyliBel","https://www.facebook.com/Arnavutkoybelediyesi","https://www.facebook.com/EsenyurtBLDYS","https://www.facebook.com/Buyukcekmecebld","https://www.facebook.com/KaracabeyBel","https://www.facebook.com/profile.php?id=100003563130499","https://www.facebook.com/profile.php?id=621017590"]
+divNum=[43,106,105,153,45,123,55,146,96,221,61,152,114,273,34,70,16,34,4,5]
 htmls=['/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div/div[4]/div[2]/div/div[2]/div/div[2]/div[{x}]/div/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div[1]',
 '/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div/div[4]/div[2]/div/div[2]/div/div[{x}]/div/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div[1]',
 '/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div/div[4]/div[2]/div/div[2]/div/div[{x}]/div/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div[1]',
@@ -22,6 +22,8 @@ htmls=['/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/di
 '/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div/div[4]/div[2]/div/div[2]/div/div[{x}]/div/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div[1]',
 '/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div[4]/div[2]/div/div[2]/div/div/div/div[{x}]/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div[1]',
 '/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div/div[4]/div[2]/div/div[2]/div/div[2]/div[{x}]/div/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div[1]',
+'/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div/div[4]/div[2]/div/div[2]/div[2]/div[{x}]/div/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div[1]',
+'/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div/div[4]/div[2]/div/div[2]/div[2]/div[{x}]/div/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div[1]'
 ]
 
 def function(url,divNumFirst,divNumLast,htmlNum):
@@ -30,32 +32,30 @@ def function(url,divNumFirst,divNumLast,htmlNum):
 
     textUtf8=url.encode("utf-8")
     md5=hashlib.md5(textUtf8)
-    
-    
+       
     chrome_options = webdriver.ChromeOptions()
     prefs = {"profile.default_content_setting_values.notifications" : 2}
     chrome_options.add_experimental_option("prefs",prefs)
     
     browser = webdriver.Chrome(executable_path='C:/Users/admin/Downloads/chromedriver_win32/chromedriver.exe', chrome_options=chrome_options) 
     
-    #....................
-    #profile erisim icin giris yapmak gerekirse
-    
     #linux icin path : '/usr/bin/chromedriver' olarak degistirilmeli
     
-    #browser.get("http://www.facebook.com")
+    #profile erisim icin giris yapmak gerekirse
+    
+    if(url==urls[0]) or (url==urls[1]) or (url==urls[8]) or (url==urls[9]):
+        browser.get("http://www.facebook.com")
 
-    #username = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input[name='email']")))
-    #password = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input[name='pass']")))
+        username = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input[name='email']")))
+        password = WebDriverWait(browser, 10).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "input[name='pass']")))
 
-    #username.clear()
-    #username.send_keys(username)#kullanici adi girilmeli
+        username.clear()
+        username.send_keys(username)#kullanici adi girilmeli
 
-    #password.clear()
-    #password.send_keys(password)#sifre girilmeli
+        password.clear()
+        password.send_keys(password)#sifre girilmeli
 
-    #button = WebDriverWait(browser, 2).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[type='submit']"))).click()
-    #....................
+        button = WebDriverWait(browser, 2).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[type='submit']"))).click()
     
     time.sleep(5)
     
@@ -171,21 +171,13 @@ def function(url,divNumFirst,divNumLast,htmlNum):
 
 #siteleri çağırma
 
-function(urls[0],divNum[0],divNum[1],htmls[0])
-function(urls[1],divNum[2],divNum[3],htmls[1])
+#function(urls[0],divNum[0],divNum[1],htmls[0]) #yorum satirindakiler giris yapılarak erisilebilecek veriler
+#function(urls[1],divNum[2],divNum[3],htmls[1]) #bu verilere erisebilmek icin yukaridaki kullanici adi ve sifre girilmelidir
 function(urls[2],divNum[4],divNum[5],htmls[2])
 function(urls[3],divNum[6],divNum[7],htmls[3])
 function(urls[4],divNum[8],divNum[9],htmls[4])
 function(urls[5],divNum[10],divNum[11],htmls[5])
 function(urls[6],divNum[12],divNum[13],htmls[6])
 function(urls[7],divNum[14],divNum[15],htmls[7])
-
-#verilen urllerde 2 url icin giris gerekiyor o urller, div numaraları ve html elementleri yukarıdaki o-listlere eklenebilir.
-
-#https://www.facebook.com/profile.php?id=100003563130499
-#/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div/div[4]/div[2]/div/div[2]/div[2]/div[{x}]/div/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div[1]
-#16,34
-
-#https://www.facebook.com/profile.php?id=621017590
-#/html/body/div[1]/div/div[1]/div/div[3]/div/div/div/div[1]/div[1]/div/div/div[4]/div[2]/div/div[2]/div[2]/div[{x}]/div/div/div/div/div/div/div/div/div/div/div[2]/div/div[4]/div/div/div[1]/div/div[1]
-#4,5
+#function(urls[8],divNum[16],divNum[17],htmls[8])
+#function(urls[9],divNum[18],divNum[19],htmls[9])
