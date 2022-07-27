@@ -177,7 +177,8 @@ function(urls[2],divNum[4],divNum[5],htmls[2])
 function(urls[3],divNum[6],divNum[7],htmls[3])
 function(urls[4],divNum[8],divNum[9],htmls[4])
 function(urls[5],divNum[10],divNum[11],htmls[5])
-function(urls[6],divNum[12],divNum[13],htmls[6])
 function(urls[7],divNum[14],divNum[15],htmls[7])
-#function(urls[8],divNum[16],divNum[17],htmls[8])
-#function(urls[9],divNum[18],divNum[19],htmls[9])
+#function(urls[8],divNum[16],divNum[17],htmls[8])#auto-login
+#function(urls[9],divNum[18],divNum[19],htmls[9])#auto-login
+
+#function(urls[6],divNum[12],divNum[13],htmls[6])#bu urldeki veriler bazi bağlantılarda alinamiyor
